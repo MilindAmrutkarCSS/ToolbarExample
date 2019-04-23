@@ -12,9 +12,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -25,8 +26,8 @@ import java.util.ArrayList;
 public class FirstFragment extends Fragment {
 
     ListView listView;
-    ArrayList<String> list;
-    ArrayAdapter<String> adapter;
+    ArrayList<Employees> list;
+    CustomAdapter adapter;
     Context context;
 
     @Override
@@ -42,18 +43,31 @@ public class FirstFragment extends Fragment {
 
         listView = view.findViewById(R.id.listView);
         list = new ArrayList<>();
-        list.add("Apple");
-        list.add("Banana");
-        list.add("Pineapple");
-        list.add("Orange");
-        list.add("Lychee");
-        list.add("Gavava");
-        list.add("Peech");
-        list.add("Melon");
-        list.add("Watermelon");
-        list.add("Papaya");
+        list.add(new Employees("Milind", "Male"));
+        list.add(new Employees("Tushar", "Male"));
+        list.add(new Employees("Ajay", "Male"));
+        list.add(new Employees("Hardik", "Male"));
+        list.add(new Employees("Rahul", "Male"));
+        list.add(new Employees("Nikita", "Female"));
+        list.add(new Employees("Shruti", "Female"));
+        list.add(new Employees("Godwin", "Male"));
+        list.add(new Employees("Milind1", "Male"));
+        list.add(new Employees("Tushar1", "Male"));
+        list.add(new Employees("Ajay1", "Male"));
+        list.add(new Employees("Hardik1", "Male"));
+        list.add(new Employees("Rahul1", "Male"));
+        list.add(new Employees("Nikita1", "Female"));
+        list.add(new Employees("Shruti1", "Female"));
+        list.add(new Employees("Godwin1", "Male"));
 
-        adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, list);
+        adapter = new CustomAdapter(list, context);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Employees employees = list.get(position);
+                Toast.makeText(context, "Name: " + employees.getName() + " Gender: " + employees.getGender(), Toast.LENGTH_SHORT).show();
+            }
+        });
         listView.setAdapter(adapter);
         return view;
     }
@@ -80,11 +94,6 @@ public class FirstFragment extends Fragment {
         mSearchView.setQueryHint("Enter fruit name");
         mSearchView.setMaxWidth(Integer.MAX_VALUE);
 
-
-       /* ImageView magImage = (ImageView)mSearchView.findViewById(android.support.v7.appcompat.R.id.search_mag_icon);
-        magImage.setVisibility(View.GONE);
-        magImage.setImageDrawable(null);*/
-
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -93,12 +102,13 @@ public class FirstFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                adapter.getFilter().filter(s);
+                //adapter.getFilter().filter(s);
+                adapter.filter(s);
                 return false;
             }
         });
-
-
         super.onCreateOptionsMenu(menu, inflater);
     }
+
+
 }
