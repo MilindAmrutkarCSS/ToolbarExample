@@ -11,6 +11,11 @@
     <style name="AppTheme.Toolbar" parent="AppTheme">
         <item name="android:textColorPrimary">@color/green</item>
         <item name="android:background">@android:color/white</item>
+        <item name="searchViewStyle">@style/searchStyle</item>
+    </style>
+
+    <style name="searchStyle" parent="Widget.AppCompat.SearchView.ActionBar">
+        <item name="android:searchIcon">@null</item>
     </style>
 
 </resources>

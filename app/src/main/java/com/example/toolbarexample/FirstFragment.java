@@ -2,7 +2,6 @@ package com.example.toolbarexample;
 
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,12 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 
 /**
@@ -79,9 +75,15 @@ public class FirstFragment extends Fragment {
 
         EditText searchEditText = mSearchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         searchEditText.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-        searchEditText.setHintTextColor(getResources().getColor(R.color.darkBlue));
+        searchEditText.setHintTextColor(getResources().getColor(R.color.colorPrimaryDark));
 
         mSearchView.setQueryHint("Enter fruit name");
+        mSearchView.setMaxWidth(Integer.MAX_VALUE);
+
+
+       /* ImageView magImage = (ImageView)mSearchView.findViewById(android.support.v7.appcompat.R.id.search_mag_icon);
+        magImage.setVisibility(View.GONE);
+        magImage.setImageDrawable(null);*/
 
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
